@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa6";
 
-const Blog = ({ blog,handleAddToBookmark }) => {
+const Blog = ({ blog,handleAddToBookmark,handleMarkAsRead }) => {
     // console.log(blog);
 
     const [pressBookmark,setPressBookmark] = useState(false);
@@ -12,6 +12,7 @@ const Blog = ({ blog,handleAddToBookmark }) => {
         setPressBookmark(!pressBookmark);
     };
     const {
+        id,
         cover,
         author_img,
         author,
@@ -50,7 +51,7 @@ const Blog = ({ blog,handleAddToBookmark }) => {
                         hashtags.map((hash, idx) => <span key={idx}><a href=''>#{hash}</a></span>)
                     }
                 </p>
-                <a className='underline text-[#6047EC] text-lg font-semibold' href="">Mark as read</a>
+                <button onClick={()=> handleMarkAsRead(id,reading_time)} className='underline text-[#6047EC] text-lg font-semibold' href="">Mark as read</button>
             </div>
         </div>
     );
@@ -59,6 +60,7 @@ const Blog = ({ blog,handleAddToBookmark }) => {
 Blog.propTypes = {
     blog: PropTypes.object.isRequired,
     handleAddToBookmark: PropTypes.func.isRequired,
+    handleMarkAsRead:PropTypes.func.isRequired,
 
 }
 

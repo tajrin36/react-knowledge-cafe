@@ -9,10 +9,22 @@ function App() {
 
   const [bookmark, setBookmark] = useState([]);
 
+  const [readingTime, setReadingTime] = useState(0);
+
   const handleAddToBookmark = blog => {
     // console.log(blog);
     const newBookmark = [...bookmark, blog];
     setBookmark(newBookmark);
+  }
+
+  const handleMarkAsRead = (id,time) => {
+    const newReadingTime = readingTime + time;
+    setReadingTime(newReadingTime);
+
+    //remove bookmark
+    console.log("remove",id);
+    const remainingBookmark = bookmark.filter(bookmark => bookmark.id !== id);
+    setBookmark(remainingBookmark);
   }
 
   return (
@@ -22,9 +34,11 @@ function App() {
         <div className='md:flex md:flex-row gap-x-4'>
           <Blogs
             handleAddToBookmark={handleAddToBookmark}
+            handleMarkAsRead={handleMarkAsRead}
           ></Blogs>
           <Bookmarks
             bookmark={bookmark}
+            readingTime={readingTime}
           ></Bookmarks>
         </div>
       </div>
